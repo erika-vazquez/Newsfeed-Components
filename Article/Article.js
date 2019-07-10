@@ -85,6 +85,38 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'This is a new article',
+    date: 'Oct 1st, 2019',
+    firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
+          hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
+          Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+
+    secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+          hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+          hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+          hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+          Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'This is also another article',
+    date: 'Jan 1st, 2019',
+    firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
+          hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
+          Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+
+    secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+          hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+          hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+          hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+          Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
 
@@ -113,50 +145,43 @@ const data = [
 
 */
 const articles = document.querySelector('.articles')
-articles.appendChild(createArt('hi rosie', 'best cat award'))
+data.forEach(data => {
+  articles.appendChild(createArt(data.title, data.date, data.firstParagraph,data.secondParagraph, data.thirdParagraph))
+})
 
-function createArt(title, content) {
+
+function createArt(title, date, firstParagraph, secondParagraph, thirdParagraph) {
   // define new elements
   const article = document.createElement('div');
   const articleTitle = document.createElement('h2');
   const articleDate = document.createElement('p'); 
   const articleContent = document.createElement('div'); //separate by commas
-  const spanButton = document.createElement('span');
+  const expandButton = document.createElement('span');
   
   // Setup structure of elements
   article.appendChild(articleTitle)
   article.appendChild(articleDate)
   article.appendChild(articleContent)
-  article.appendChild(spanButton)
+  article.appendChild(expandButton)
 
-  
   // set class names
-  panel.classList.add('panel')
-  panelBar.classList.add('panel-bar')
-  buttonPanel.classList.add('panel-buttons')
-  buttonOpen.classList.add('panel-btn-open')
-  buttonClose.classList.add('panel-btn-close', 'hide-btn')
-  panelContent.classList.add('panel-content')
+  article.classList.add('article')
+  expandButton.classList.add('expandButton')
   
   // set text content
-  buttonOpen.textContent = 'Open'
-  buttonClose.textContent = 'Close'
-  panelContent.textContent = content
-  panelTitle.textContent = title
+  expandButton.textContent = 'Click to Expand';
+  articleContent.textContent = firstParagraph
+  articleTitle.textContent = title
+  articleDate.textContent = date
+
   
   //Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
-
-  // button events
-  // ❌ buttonPanel.querySelectorAll('button').forEach(btn => btn.addEventListener('click', clickHandler))
-  // ✅ buttonPanel.addEventListener('click', clickHandler)
-  article.addEventListener('click', event => {
+  expandButton.addEventListener('click', event => {
     console.log('button clicked', event.target)
-    // 1. toggle hide-btn on BOTH buttons
-    articleOpen.classList.toggle('hide-btn')
-   // buttonClose.classList.toggle('hide-btn')
-    // 2. Change visibility of the content w/ 'toggle-on'
-    panelContent.classList.toggle('toggle-on')
+    // 1. toggle article-open on button
+    article.classList.toggle('article-open')
+    
   })
   
-  return panel
+  return article
 }
