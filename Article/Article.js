@@ -112,3 +112,51 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
 
 */
+const articles = document.querySelector('.articles')
+articles.appendChild(createArt('hi rosie', 'best cat award'))
+
+function createArt(title, content) {
+  // define new elements
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p'); 
+  const articleContent = document.createElement('div'); //separate by commas
+  const spanButton = document.createElement('span');
+  
+  // Setup structure of elements
+  article.appendChild(articleTitle)
+  article.appendChild(articleDate)
+  article.appendChild(articleContent)
+  article.appendChild(spanButton)
+
+  
+  // set class names
+  panel.classList.add('panel')
+  panelBar.classList.add('panel-bar')
+  buttonPanel.classList.add('panel-buttons')
+  buttonOpen.classList.add('panel-btn-open')
+  buttonClose.classList.add('panel-btn-close', 'hide-btn')
+  panelContent.classList.add('panel-content')
+  
+  // set text content
+  buttonOpen.textContent = 'Open'
+  buttonClose.textContent = 'Close'
+  panelContent.textContent = content
+  panelTitle.textContent = title
+  
+  //Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
+
+  // button events
+  // ❌ buttonPanel.querySelectorAll('button').forEach(btn => btn.addEventListener('click', clickHandler))
+  // ✅ buttonPanel.addEventListener('click', clickHandler)
+  article.addEventListener('click', event => {
+    console.log('button clicked', event.target)
+    // 1. toggle hide-btn on BOTH buttons
+    articleOpen.classList.toggle('hide-btn')
+   // buttonClose.classList.toggle('hide-btn')
+    // 2. Change visibility of the content w/ 'toggle-on'
+    panelContent.classList.toggle('toggle-on')
+  })
+  
+  return panel
+}
