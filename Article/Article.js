@@ -155,13 +155,17 @@ function createArt(title, date, firstParagraph, secondParagraph, thirdParagraph)
   const article = document.createElement('div');
   const articleTitle = document.createElement('h2');
   const articleDate = document.createElement('p'); 
-  const articleContent = document.createElement('div'); //separate by commas
+  const articleContent = document.createElement('p'); //
+  const articleContent2 = document.createElement('p'); //
+  const articleContent3 = document.createElement('p'); //
   const expandButton = document.createElement('span');
   
   // Setup structure of elements
   article.appendChild(articleTitle)
   article.appendChild(articleDate)
   article.appendChild(articleContent)
+  article.appendChild(articleContent2)
+  article.appendChild(articleContent3)
   article.appendChild(expandButton)
 
   // set class names
@@ -169,10 +173,13 @@ function createArt(title, date, firstParagraph, secondParagraph, thirdParagraph)
   expandButton.classList.add('expandButton')
   
   // set text content
-  expandButton.textContent = 'Click to Expand';
-  articleContent.textContent = firstParagraph
   articleTitle.textContent = title
   articleDate.textContent = date
+  expandButton.textContent = 'Click to Expand';
+  articleContent.textContent = firstParagraph
+  articleContent2.textContent = secondParagraph
+  articleContent3.textContent = thirdParagraph
+  
 
   
   //Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
